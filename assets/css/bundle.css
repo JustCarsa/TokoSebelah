@@ -26,6 +26,8 @@
   --danger: #dc3545;
   --light: #fff;
   --dark: #1c1c1c;
+  --hex: #4D4DFF;
+  --navy: #000080;
   --breakpoint-xs: 0;
   --breakpoint-sm: 576px;
   --breakpoint-md: 768px;
@@ -2379,8 +2381,8 @@ fieldset:disabled a.btn {
   pointer-events: none;
 }
 .btn-primary {
-  background-color: #F093B2;
-  border-color: #F093B2;
+  background-color: #f3c0cf;
+  border-color: #f3c0cf;
   color: #ffff;
 }
 .btn-primary.focus,
@@ -8987,7 +8989,7 @@ button.bg-dark:hover {
   color: #fff !important;
 }
 .text-primary {
-  color: #f5b4ca !important;
+  color: #4D4DFF !important;
 }
 a.text-primary:focus,
 a.text-primary:hover {
@@ -9264,7 +9266,7 @@ a.text-dark:hover {
 }
 .submit-button {
   align-items: center;
-  background: #f5b4ca;
+  background: #000080;
   border-radius: 5px;
   color: #fff;
   cursor: pointer;
