@@ -1,0 +1,83 @@
+.product-item.active {
+  border: 4px solid #ff8eb2;
+  position: relative;
+}
+
+.product-item {
+  border-radius: 10px;
+}
+
+.product-item > .check {
+  width: 27px;
+  height: 27px;
+  border-bottom-left-radius: 10px;
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  color: white;
+  background: #ff8eb2;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.product-item.active > .check {
+  display: flex;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  font-size: 25px;
+  color: black;
+}
+
+.circle-title {
+  background: #FF8DB1;
+  border: 3px solid pink;
+  margin-right: 10px;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+@media (min-width: 992px) {
+  .gambar {
+    min-height: 400px !important;
+  }
+
+  .product-item.active:after {
+    width: 35px;
+    height: 35px;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .gambar {
+    height: 200px !important;
+  }
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #f5b4ca;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #ff8eb2;
+}
