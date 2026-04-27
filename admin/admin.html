@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#F093B2" />
+  <title>Admin Panel — TOKOSEBELAH</title>
+  <link rel="shortcut icon" href="../assets/icon.jpg" type="image/x-icon" />
+
+  <!-- Same fonts as the main site -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet" />
+
+  <!-- Bootstrap 4 (matching main site) -->
+  <link rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+
+  <!-- Fontawesome (same kit isn't accessible offline so use CDN) -->
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <link rel="stylesheet" href="admin.css" />
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <h4 class="m-0">TOKOSEBELAH</h4>
+      <small>Admin Panel</small>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a href="#" class="nav-item active" data-page="dashboard">
+        <i class="fas fa-home"></i> <span>Dashboard</span>
+      </a>
+      <a href="#" class="nav-item" data-page="products">
+        <i class="fas fa-box"></i> <span>Produk</span>
+      </a>
+      <a href="#" class="nav-item" data-page="categories">
+        <i class="fas fa-layer-group"></i> <span>Kategori Game</span>
+      </a>
+      <a href="#" class="nav-item" data-page="banners">
+        <i class="fas fa-image"></i> <span>Banner & Slider</span>
+      </a>
+      <a href="#" class="nav-item" data-page="settings">
+        <i class="fas fa-cog"></i> <span>Pengaturan</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <a href="#" class="logout-btn">
+        <i class="fas fa-sign-out-alt"></i> Keluar
+      </a>
+    </div>
+  </aside>
+
+  <!-- Main content -->
+  <div class="main-wrapper">
+
+    <!-- Topbar -->
+    <header class="topbar shadow-sm">
+      <button class="btn-toggle" id="btnToggle" aria-label="toggle sidebar">
+        <i class="fas fa-bars"></i>
+      </button>
+
+      <div class="topbar-search">
+        <i class="fas fa-search"></i>
+        <input type="text" placeholder="Cari produk, kategori, ..." />
+      </div>
+
+      <div class="topbar-right">
+        <button class="icon-btn" title="Notifikasi">
+          <i class="fas fa-bell"></i>
+          <span class="badge-dot">3</span>
+        </button>
+        <div class="topbar-user">
+          <img src="https://i.pravatar.cc/40?img=11" alt="admin" />
+          <div class="d-none d-md-block">
+            <div class="user-name">Admin Carsa</div>
+            <small class="user-role">Super Admin</small>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Page content -->
+    <main class="page-content">
+
+      <!-- ============ DASHBOARD ============ -->
+      <section class="page" id="page-dashboard">
+        <div class="page-header">
+          <div>
+            <h2 class="page-title">Dashboard</h2>
+            <p class="page-subtitle">Selamat datang kembali, Admin 👋</p>
+          </div>
+          <button class="btn btn-primary-pink" data-toggle="modal" data-target="#productModal">
+            <i class="fas fa-plus mr-1"></i> Tambah Produk
+          </button>
+        </div>
+
+        <!-- Stat cards -->
+        <div class="row stat-row">
+          <div class="col-md-6 col-xl-3 mb-3">
+            <div class="stat-card">
+              <div class="stat-icon bg-pink"><i class="fas fa-box"></i></div>
+              <div>
+                <div class="stat-label">Total Produk</div>
+                <div class="stat-value">142</div>
+                <small class="text-success"><i class="fas fa-arrow-up"></i> 12% bulan ini</small>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-xl-3 mb-3">
+            <div class="stat-card">
+              <div class="stat-icon bg-blue"><i class="fas fa-shopping-cart"></i></div>
+              <div>
+                <div class="stat-label">Pesanan Hari Ini</div>
+                <div class="stat-value">87</div>
+                <small class="text-success"><i class="fas fa-arrow-up"></i> 5% kemarin</small>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-xl-3 mb-3">
+            <div class="stat-card">
+              <div class="stat-icon bg-green"><i class="fas fa-wallet"></i></div>
+              <div>
+                <div class="stat-label">Pendapatan</div>
+                <div class="stat-value">Rp 12,4 Jt</div>
+                <small class="text-success"><i class="fas fa-arrow-up"></i> 8% minggu ini</small>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-xl-3 mb-3">
+            <div class="stat-card">
+              <div class="stat-icon bg-purple"><i class="fas fa-users"></i></div>
+              <div>
+                <div class="stat-label">Pelanggan</div>
+                <div class="stat-value">1,284</div>
+                <small class="text-danger"><i class="fas fa-arrow-down"></i> 2% bulan ini</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent + popular -->
+        <div class="row">
+          <div class="col-lg-7 mb-3">
+            <div class="panel">
+              <div class="panel-header">
+                <h5 class="m-0">Pesanan Terbaru</h5>
+                <a href="#" class="text-pink-link">Lihat semua</a>
+              </div>
+              <div class="table-responsive">
+                <table class="table mb-0">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Pelanggan</th>
+                      <th>Produk</th>
+                      <th>Total</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>#TS2841</td>
+                      <td>Rizky Pratama</td>
+                      <td>Diamond ML 86</td>
+                      <td>Rp 22.000</td>
+                      <td><span class="badge badge-pill badge-success">Sukses</span></td>
+                    </tr>
+                    <tr>
+                      <td>#TS2840</td>
+                      <td>Sinta Dewi</td>
+                      <td>UC PUBG 60</td>
+                      <td>Rp 15.000</td>
+                      <td><span class="badge badge-pill badge-warning">Pending</span></td>
+                    </tr>
+                    <tr>
+                      <td>#TS2839</td>
+                      <td>Bagus Setiawan</td>
+                      <td>Free Fire 100 DM</td>
+                      <td>Rp 14.500</td>
+                      <td><span class="badge badge-pill badge-success">Sukses</span></td>
+                    </tr>
+                    <tr>
+                      <td>#TS2838</td>
+                      <td>Maya Kusuma</td>
+                      <td>Genshin Genesis 60</td>
+                      <td>Rp 16.000</td>
+                      <td><span class="badge badge-pill badge-danger">Gagal</span></td>
+                    </tr>
+                    <tr>
+                      <td>#TS2837</td>
+                      <td>Andi Wijaya</td>
+                      <td>Weekly Diamond Pass</td>
+                      <td>Rp 27.500</td>
+                      <td><span class="badge badge-pill badge-success">Sukses</span></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-5 mb-3">
+            <div class="panel">
+              <div class="panel-header">
+                <h5 class="m-0">Game Terlaris</h5>
+                <a href="#" class="text-pink-link">Lihat semua</a>
+              </div>
+              <ul class="popular-list">
+                <li>
+                  <span class="rank">1</span>
+                  <div class="thumb"><i class="fas fa-gamepad"></i></div>
+                  <div class="flex-grow-1">
+                    <div class="name">Mobile Legends</div>
+                    <small class="text-muted">Diamond Top Up</small>
+                  </div>
+                  <strong>432 trx</strong>
+                </li>
+                <li>
+                  <span class="rank">2</span>
+                  <div class="thumb"><i class="fas fa-crosshairs"></i></div>
+                  <div class="flex-grow-1">
+                    <div class="name">Free Fire</div>
+                    <small class="text-muted">Diamonds</small>
+                  </div>
+                  <strong>318 trx</strong>
+                </li>
+                <li>
+                  <span class="rank">3</span>
+                  <div class="thumb"><i class="fas fa-skull"></i></div>
+                  <div class="flex-grow-1">
+                    <div class="name">PUBG Mobile</div>
+                    <small class="text-muted">UC</small>
+                  </div>
+                  <strong>241 trx</strong>
+                </li>
+                <li>
+                  <span class="rank">4</span>
+                  <div class="thumb"><i class="fas fa-star"></i></div>
+                  <div class="flex-grow-1">
+                    <div class="name">Genshin Impact</div>
+                    <small class="text-muted">Genesis Crystal</small>
+                  </div>
+                  <strong>197 trx</strong>
+                </li>
+                <li>
+                  <span class="rank">5</span>
+                  <div class="thumb"><i class="fas fa-bolt"></i></div>
+                  <div class="flex-grow-1">
+                    <div class="name">Valorant</div>
+                    <small class="text-muted">VP</small>
+                  </div>
+                  <strong>112 trx</strong>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ PRODUCTS ============ -->
+      <section class="page" id="page-products" style="display:none;">
+        <div class="page-header">
+          <div>
+            <h2 class="page-title">Manajemen Produk</h2>
+            <p class="page-subtitle">Kelola semua produk top-up di toko kamu.</p>
+          </div>
+          <button class="btn btn-primary-pink" data-toggle="modal" data-target="#productModal">
+            <i class="fas fa-plus mr-1"></i> Tambah Produk
+          </button>
+        </div>
+
+        <!-- Filter bar -->
+        <div class="filter-bar">
+          <div class="filter-search">
+            <i class="fas fa-search"></i>
+            <input type="text" placeholder="Cari nama produk..." />
+          </div>
+          <select class="form-control form-control-sm filter-select">
+            <option>Semua Kategori</option>
+            <option>Mobile Legends</option>
+            <option>PUBG Mobile</option>
+            <option>Free Fire</option>
+            <option>Genshin Impact</option>
+            <option>Valorant</option>
+          </select>
+          <select class="form-control form-control-sm filter-select">
+            <option>Semua Status</option>
+            <option>Aktif</option>
+            <option>Nonaktif</option>
+          </select>
+        </div>
+
+        <!-- Products table -->
+        <div class="panel">
+          <div class="table-responsive">
+            <table class="table table-hover mb-0 product-table">
+              <thead>
+                <tr>
+                  <th><input type="checkbox" /></th>
+                  <th>Produk</th>
+                  <th>Kategori</th>
+                  <th>Harga</th>
+                  <th>Stok</th>
+                  <th>Status</th>
+                  <th class="text-right">Aksi</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><input type="checkbox" /></td>
+                  <td>
+                    <div class="prod-cell">
+                      <div class="prod-thumb"><i class="fas fa-gem"></i></div>
+                      <div>
+                        <div class="prod-name">Diamond Fast 86</div>
+                        <small class="text-muted">SKU: ML-FAST-86</small>
+                      </div>
+                    </div>
+                  </td>
+                  <td>Mobile Legends</td>
+                  <td>Rp 22.000</td>
+                  <td>∞</td>
+                  <td><span class="badge badge-pill badge-success">Aktif</span></td>
+                  <td class="text-right">
+                    <button class="icon-action" title="Edit"><i class="fas fa-edit"></i></button>
+                    <button class="icon-action" title="Hapus"><i class="fas fa-trash"></i></button>
+                  </td>
+                </tr>
+                <tr>
+                  <td><input type="checkbox" /></td>
+                  <td>
+                    <div class="prod-cell">
+                      <div class="prod-thumb"><i class="fas fa-gem"></i></div>
+                      <div>
+                        <div class="prod-name">Diamond Semi Fast 172</div>
+                        <small class="text-muted">SKU: ML-SF-172</small>
+                      </div>
+                    </div>
+                  </td>
+                  <td>Mobile Legends</td>
+                  <td>Rp 43.500</td>
+                  <td>∞</td>
+                  <td><span class="badge badge-pill badge-success">Aktif</span></td>
+                  <td class="text-right">
+                    <button class="icon-action"><i class="fas fa-edit"></i></button>
+                    <button class="icon-action"><i class="fas fa-trash"></i></button>
+                  </td>
+                </tr>
+                <tr>
+                  <td><input type="checkbox" /></td>
+                  <td>
+                    <div class="prod-cell">
+                      <div class="prod-thumb"><i class="fas fa-coins"></i></div>
+                      <div>
+                        <div class="prod-name">PUBG UC 60</div>
+                        <small class="text-muted">SKU: PUBG-UC-60</small>
+                      </div>
+                    </div>
+                  </td>
+                  <td>PUBG Mobile</td>
+                  <td>Rp 15.000</td>
+                  <td>∞</td>
+                  <td><span class="badge badge-pill badge-success">Aktif</span></td>
+                  <td class="text-right">
+                    <button class="icon-action"><i class="fas fa-edit"></i></button>
+                    <button class="icon-action"><i class="fas fa-trash"></i></button>
+                  </td>
+                </tr>
+                <tr>
+                  <td><input type="checkbox" /></td>
+                  <td>
+                    <div class="prod-cell">
+                      <div class="prod-thumb"><i class="fas fa-fire"></i></div>
+                      <div>
+                        <div class="prod-name">Free Fire 100 Diamonds</div>
+                        <small class="text-muted">SKU: FF-DM-100</small>
+                      </div>
+                    </div>
+                  </td>
+                  <td>Free Fire</td>
+                  <td>Rp 14.500</td>
+                  <td>∞</td>
+                  <td><span class="badge badge-pill badge-success">Aktif</span></td>
+                  <td class="text-right">
+                    <button class="icon-action"><i class="fas fa-edit"></i></button>
+                    <button class="icon-action"><i class="fas fa-trash"></i></button>
+                  </td>
+                </tr>
+                <tr>
+                  <td><input type="checkbox" /></td>
+                  <td>
+                    <div class="prod-cell">
+                      <div class="prod-thumb"><i class="fas fa-star"></i></div>
+                      <div>
+                        <div class="prod-name">Genesis Crystal 60</div>
+                        <small class="text-muted">SKU: GI-GC-60</small>
+                      </div>
+                    </div>
+                  </td>
+                  <td>Genshin Impact</td>
+                  <td>Rp 16.000</td>
+                  <td>∞</td>
+                  <td><span class="badge badge-pill badge-warning">Stok Habis</span></td>
+                  <td class="text-right">
+                    <button class="icon-action"><i class="fas fa-edit"></i></button>
+                    <button class="icon-action"><i class="fas fa-trash"></i></button>
+                  </td>
+                </tr>
+                <tr>
+                  <td><input type="checkbox" /></td>
+                  <td>
+                    <div class="prod-cell">
+                      <div class="prod-thumb"><i class="fas fa-trophy"></i></div>
+                      <div>
+                        <div class="prod-name">Weekly Diamond Pass</div>
+                        <small class="text-muted">SKU: ML-WDP</small>
+                      </div>
+                    </div>
+                  </td>
+                  <td>Mobile Legends</td>
+                  <td>Rp 27.500</td>
+                  <td>∞</td>
+                  <td><span class="badge badge-pill badge-success">Aktif</span></td>
+                  <td class="text-right">
+                    <button class="icon-action"><i class="fas fa-edit"></i></button>
+                    <button class="icon-action"><i class="fas fa-trash"></i></button>
+                  </td>
+                </tr>
+                <tr>
+                  <td><input type="checkbox" /></td>
+                  <td>
+                    <div class="prod-cell">
+                      <div class="prod-thumb"><i class="fas fa-bolt"></i></div>
+                      <div>
+                        <div class="prod-name">Valorant Points 475</div>
+                        <small class="text-muted">SKU: VAL-VP-475</small>
+                      </div>
+                    </div>
+                  </td>
+                  <td>Valorant</td>
+                  <td>Rp 55.000</td>
+                  <td>∞</td>
+                  <td><span class="badge badge-pill badge-secondary">Nonaktif</span></td>
+                  <td class="text-right">
+                    <button class="icon-action"><i class="fas fa-edit"></i></button>
+                    <button class="icon-action"><i class="fas fa-trash"></i></button>
+                  </td>
+                </tr>
+                <tr>
+                  <td><input type="checkbox" /></td>
+                  <td>
+                    <div class="prod-cell">
+                      <div class="prod-thumb"><i class="fas fa-skull"></i></div>
+                      <div>
+                        <div class="prod-name">CoC Gems 500</div>
+                        <small class="text-muted">SKU: COC-GEM-500</small>
+                      </div>
+                    </div>
+                  </td>
+                  <td>Clash Of Clans</td>
+                  <td>Rp 75.000</td>
+                  <td>∞</td>
+                  <td><span class="badge badge-pill badge-success">Aktif</span></td>
+                  <td class="text-right">
+                    <button class="icon-action"><i class="fas fa-edit"></i></button>
+                    <button class="icon-action"><i class="fas fa-trash"></i></button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="table-footer">
+            <small class="text-muted">Menampilkan 8 dari 142 produk</small>
+            <nav>
+              <ul class="pagination pagination-sm m-0">
+                <li class="page-item disabled"><a class="page-link" href="#">‹</a></li>
+                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#">›</a></li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ CATEGORIES ============ -->
+      <section class="page" id="page-categories" style="display:none;">
+        <div class="page-header">
+          <div>
+            <h2 class="page-title">Kategori Game</h2>
+            <p class="page-subtitle">Daftar game yang tersedia di TOKOSEBELAH.</p>
+          </div>
+          <button class="btn btn-primary-pink">
+            <i class="fas fa-plus mr-1"></i> Tambah Kategori
+          </button>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 col-lg-4 mb-3">
+            <div class="cat-card">
+              <div class="cat-icon"><i class="fas fa-gem"></i></div>
+              <h5>Mobile Legends</h5>
+              <p class="text-muted">10 produk aktif</p>
+              <div class="cat-actions">
+                <button class="btn btn-sm btn-outline-pink"><i class="fas fa-edit"></i> Edit</button>
+                <button class="btn btn-sm btn-outline-danger"><i class="fas fa-trash"></i></button>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4 mb-3">
+            <div class="cat-card">
+              <div class="cat-icon"><i class="fas fa-skull"></i></div>
+              <h5>PUBG Mobile</h5>
+              <p class="text-muted">8 produk aktif</p>
+              <div class="cat-actions">
+                <button class="btn btn-sm btn-outline-pink"><i class="fas fa-edit"></i> Edit</button>
+                <button class="btn btn-sm btn-outline-danger"><i class="fas fa-trash"></i></button>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4 mb-3">
+            <div class="cat-card">
+              <div class="cat-icon"><i class="fas fa-fire"></i></div>
+              <h5>Free Fire</h5>
+              <p class="text-muted">12 produk aktif</p>
+              <div class="cat-actions">
+                <button class="btn btn-sm btn-outline-pink"><i class="fas fa-edit"></i> Edit</button>
+                <button class="btn btn-sm btn-outline-danger"><i class="fas fa-trash"></i></button>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4 mb-3">
+            <div class="cat-card">
+              <div class="cat-icon"><i class="fas fa-star"></i></div>
+              <h5>Genshin Impact</h5>
+              <p class="text-muted">6 produk aktif</p>
+              <div class="cat-actions">
+                <button class="btn btn-sm btn-outline-pink"><i class="fas fa-edit"></i> Edit</button>
+                <button class="btn btn-sm btn-outline-danger"><i class="fas fa-trash"></i></button>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4 mb-3">
+            <div class="cat-card">
+              <div class="cat-icon"><i class="fas fa-bolt"></i></div>
+              <h5>Valorant</h5>
+              <p class="text-muted">5 produk aktif</p>
+              <div class="cat-actions">
+                <button class="btn btn-sm btn-outline-pink"><i class="fas fa-edit"></i> Edit</button>
+                <button class="btn btn-sm btn-outline-danger"><i class="fas fa-trash"></i></button>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4 mb-3">
+            <div class="cat-card">
+              <div class="cat-icon"><i class="fas fa-crosshairs"></i></div>
+              <h5>Clash Of Clans</h5>
+              <p class="text-muted">4 produk aktif</p>
+              <div class="cat-actions">
+                <button class="btn btn-sm btn-outline-pink"><i class="fas fa-edit"></i> Edit</button>
+                <button class="btn btn-sm btn-outline-danger"><i class="fas fa-trash"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ BANNERS ============ -->
+      <section class="page" id="page-banners" style="display:none;">
+        <div class="page-header">
+          <div>
+            <h2 class="page-title">Banner & Slider</h2>
+            <p class="page-subtitle">Atur banner promo yang muncul di halaman utama.</p>
+          </div>
+          <button class="btn btn-primary-pink">
+            <i class="fas fa-plus mr-1"></i> Upload Banner
+          </button>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 col-lg-4 mb-3">
+            <div class="banner-card">
+              <div class="banner-preview" style="background: linear-gradient(135deg,#000080,#4D4DFF);">
+                <span>SLIDE 1</span>
+              </div>
+              <div class="banner-info">
+                <strong>Promo Spesial Mobile Legends</strong>
+                <small class="text-muted d-block">slide-1.jpg • Aktif</small>
+                <div class="mt-2">
+                  <button class="btn btn-sm btn-outline-pink"><i class="fas fa-edit"></i></button>
+                  <button class="btn btn-sm btn-outline-danger"><i class="fas fa-trash"></i></button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4 mb-3">
+            <div class="banner-card">
+              <div class="banner-preview" style="background: linear-gradient(135deg,#4D4DFF,#1a1aaa);">
+                <span>SLIDE 2</span>
+              </div>
+              <div class="banner-info">
+                <strong>Diamond PUBG Diskon</strong>
+                <small class="text-muted d-block">slide-2.jpg • Aktif</small>
+                <div class="mt-2">
+                  <button class="btn btn-sm btn-outline-pink"><i class="fas fa-edit"></i></button>
+                  <button class="btn btn-sm btn-outline-danger"><i class="fas fa-trash"></i></button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4 mb-3">
+            <div class="banner-card">
+              <div class="banner-preview" style="background: linear-gradient(135deg,#1a1aaa,#000080);">
+                <span>SLIDE 3</span>
+              </div>
+              <div class="banner-info">
+                <strong>Free Fire Event</strong>
+                <small class="text-muted d-block">slide-3.png • Nonaktif</small>
+                <div class="mt-2">
+                  <button class="btn btn-sm btn-outline-pink"><i class="fas fa-edit"></i></button>
+                  <button class="btn btn-sm btn-outline-danger"><i class="fas fa-trash"></i></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ SETTINGS ============ -->
+      <section class="page" id="page-settings" style="display:none;">
+        <div class="page-header">
+          <div>
+            <h2 class="page-title">Pengaturan</h2>
+            <p class="page-subtitle">Konfigurasi toko dan informasi kontak.</p>
+          </div>
+        </div>
+
+        <div class="panel p-4">
+          <h6 class="mb-3">Informasi Toko</h6>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label>Nama Toko</label>
+              <input type="text" class="form-control" value="TOKOSEBELAH" />
+            </div>
+            <div class="form-group col-md-6">
+              <label>Tagline</label>
+              <input type="text" class="form-control" value="Top Up Game Murah & Aman 100%" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Deskripsi</label>
+            <textarea class="form-control" rows="3">Top-Up Game Favorite Kamu Di TOKOSEBELAH Agar Main Game Semakin Seru.</textarea>
+          </div>
+
+          <hr />
+          <h6 class="mb-3">Kontak & Sosial Media</h6>
+          <div class="form-row">
+            <div class="form-group col-md-4">
+              <label>WhatsApp</label>
+              <input type="text" class="form-control" value="0895-3069-5776" />
+            </div>
+            <div class="form-group col-md-4">
+              <label>Instagram</label>
+              <input type="text" class="form-control" value="@karsacarsa" />
+            </div>
+            <div class="form-group col-md-4">
+              <label>TikTok</label>
+              <input type="text" class="form-control" value="@justcarsa" />
+            </div>
+          </div>
+
+          <hr />
+          <h6 class="mb-3">Metode Pembayaran</h6>
+          <div class="payment-methods">
+            <label class="pm-check"><input type="checkbox" checked /> DANA</label>
+            <label class="pm-check"><input type="checkbox" checked /> OVO</label>
+            <label class="pm-check"><input type="checkbox" checked /> GOPAY</label>
+            <label class="pm-check"><input type="checkbox" checked /> SHOPEEPAY</label>
+            <label class="pm-check"><input type="checkbox" checked /> LINKAJA</label>
+            <label class="pm-check"><input type="checkbox" checked /> BCA</label>
+            <label class="pm-check"><input type="checkbox" checked /> SEABANK</label>
+            <label class="pm-check"><input type="checkbox" checked /> INDOMARET</label>
+            <label class="pm-check"><input type="checkbox" checked /> QRIS</label>
+          </div>
+
+          <div class="text-right mt-4">
+            <button class="btn btn-light">Batal</button>
+            <button class="btn btn-primary-pink"><i class="fas fa-save mr-1"></i> Simpan Perubahan</button>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Add/Edit product modal -->
+  <div class="modal fade" id="productModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="productModalTitle">Tambah Produk Baru</h5>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="form-row">
+            <div class="form-group col-md-8">
+              <label>Nama Produk</label>
+              <input type="text" class="form-control" placeholder="Contoh: Diamond Fast 86" />
+            </div>
+            <div class="form-group col-md-4">
+              <label>SKU</label>
+              <input type="text" class="form-control" placeholder="ML-FAST-86" />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label>Kategori Game</label>
+              <select class="form-control">
+                <option>Mobile Legends</option>
+                <option>PUBG Mobile</option>
+                <option>Free Fire</option>
+                <option>Genshin Impact</option>
+                <option>Valorant</option>
+              </select>
+            </div>
+            <div class="form-group col-md-3">
+              <label>Harga (Rp)</label>
+              <input type="number" class="form-control" placeholder="22000" />
+            </div>
+            <div class="form-group col-md-3">
+              <label>Status</label>
+              <select class="form-control">
+                <option>Aktif</option>
+                <option>Nonaktif</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Deskripsi</label>
+            <textarea class="form-control" rows="3" placeholder="Deskripsi produk..."></textarea>
+          </div>
+          <div class="form-group">
+            <label>Gambar Produk</label>
+            <div class="upload-box">
+              <i class="fas fa-cloud-upload-alt"></i>
+              <p class="m-0">Klik atau drag file gambar ke sini</p>
+              <small class="text-muted">PNG, JPG max 2MB</small>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-light" data-dismiss="modal">Batal</button>
+          <button type="button" class="btn btn-primary-pink" id="productModalSave">Simpan Produk</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Edit Kategori modal -->
+  <div class="modal fade" id="categoryModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Edit Kategori Game</h5>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Nama Kategori</label>
+            <input type="text" class="form-control" id="catName" value="Mobile Legends" />
+          </div>
+          <div class="form-group">
+            <label>Slug / URL</label>
+            <input type="text" class="form-control" value="mobile-legends" />
+          </div>
+          <div class="form-group">
+            <label>Deskripsi</label>
+            <textarea class="form-control" rows="3">Top up Diamond Mobile Legends dengan harga termurah dan proses cepat.</textarea>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label>Status</label>
+              <select class="form-control">
+                <option>Aktif</option>
+                <option>Nonaktif</option>
+              </select>
+            </div>
+            <div class="form-group col-md-6">
+              <label>Urutan Tampil</label>
+              <input type="number" class="form-control" value="1" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Icon Kategori</label>
+            <div class="upload-box">
+              <i class="fas fa-cloud-upload-alt"></i>
+              <p class="m-0">Klik atau drag file icon ke sini</p>
+              <small class="text-muted">PNG, SVG max 1MB</small>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-light" data-dismiss="modal">Batal</button>
+          <button type="button" class="btn btn-primary-pink">Simpan Perubahan</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Edit Banner modal -->
+  <div class="modal fade" id="bannerModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Edit Banner</h5>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Judul Banner</label>
+            <input type="text" class="form-control" id="bannerTitle" value="Promo Spesial Mobile Legends" />
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label>Link Tujuan (URL)</label>
+              <input type="text" class="form-control" value="id/diamond-fast.html" />
+            </div>
+            <div class="form-group col-md-3">
+              <label>Urutan</label>
+              <input type="number" class="form-control" value="1" />
+            </div>
+            <div class="form-group col-md-3">
+              <label>Status</label>
+              <select class="form-control">
+                <option>Aktif</option>
+                <option>Nonaktif</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label>Tanggal Mulai</label>
+              <input type="date" class="form-control" value="2026-04-01" />
+            </div>
+            <div class="form-group col-md-6">
+              <label>Tanggal Berakhir</label>
+              <input type="date" class="form-control" value="2026-05-31" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Gambar Banner</label>
+            <div class="upload-box">
+              <i class="fas fa-cloud-upload-alt"></i>
+              <p class="m-0">Klik atau drag file gambar ke sini</p>
+              <small class="text-muted">Rekomendasi 1920×600px • PNG, JPG max 3MB</small>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-light" data-dismiss="modal">Batal</button>
+          <button type="button" class="btn btn-primary-pink">Simpan Perubahan</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>

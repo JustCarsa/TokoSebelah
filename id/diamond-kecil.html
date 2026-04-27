@@ -288,11 +288,106 @@
                                 </div>
                             </div>
 
-                            <button class="submit-button btn">Beli sekarang</button>
+                            
+            <!-- Pilih Metode Pembayaran -->
+            <div class="mb-3 title mt-4">
+                <span class="circle-title">3</span> Pilih Metode Pembayaran
+            </div>
+            <style>
+              .payment-option{cursor:pointer;padding:0 5px}
+              .payment-option input[type=radio]{display:none}
+              .payment-box{border:2px solid #eee;border-radius:10px;padding:12px 8px;text-align:center;transition:all .2s ease;background:#fff}
+              .payment-option:hover .payment-box{border-color:#f5b4ca;transform:translateY(-2px)}
+              .payment-option input[type=radio]:checked+.payment-box{border-color:#F093B2;background:#fff5f8;box-shadow:0 4px 12px rgba(240,147,178,.25)}
+              .payment-logo{color:#fff;font-weight:700;font-size:12px;padding:8px 6px;border-radius:6px;margin-bottom:6px}
+              .payment-name{display:block;font-size:12px;color:#555;font-weight:500}
+            </style>
+            <p class="font-weight-bold mb-2 mt-2" style="font-size:13px;color:#555">E-WALLET</p>
+            <div class="row mx-0 mb-3">
+              <label class="payment-option col-6 col-md-3 mb-2">
+                <input type="radio" name="payment" value="dana">
+                <div class="payment-box"><div class="payment-logo" style="background:#118EEA">DANA</div><span class="payment-name">DANA</span></div>
+              </label>
+              <label class="payment-option col-6 col-md-3 mb-2">
+                <input type="radio" name="payment" value="ovo">
+                <div class="payment-box"><div class="payment-logo" style="background:#4C2A86">OVO</div><span class="payment-name">OVO</span></div>
+              </label>
+              <label class="payment-option col-6 col-md-3 mb-2">
+                <input type="radio" name="payment" value="gopay">
+                <div class="payment-box"><div class="payment-logo" style="background:#00AED6">GoPay</div><span class="payment-name">GoPay</span></div>
+              </label>
+              <label class="payment-option col-6 col-md-3 mb-2">
+                <input type="radio" name="payment" value="shopeepay">
+                <div class="payment-box"><div class="payment-logo" style="background:#EE4D2D">ShopeePay</div><span class="payment-name">ShopeePay</span></div>
+              </label>
+              <label class="payment-option col-6 col-md-3 mb-2">
+                <input type="radio" name="payment" value="linkaja">
+                <div class="payment-box"><div class="payment-logo" style="background:#ED1C24">LinkAja</div><span class="payment-name">LinkAja</span></div>
+              </label>
+            </div>
+            <p class="font-weight-bold mb-2" style="font-size:13px;color:#555">TRANSFER BANK</p>
+            <div class="row mx-0 mb-3">
+              <label class="payment-option col-6 col-md-3 mb-2">
+                <input type="radio" name="payment" value="bca">
+                <div class="payment-box"><div class="payment-logo" style="background:#0060A8">BCA</div><span class="payment-name">Bank BCA</span></div>
+              </label>
+              <label class="payment-option col-6 col-md-3 mb-2">
+                <input type="radio" name="payment" value="seabank">
+                <div class="payment-box"><div class="payment-logo" style="background:#FF5C00">SeaBank</div><span class="payment-name">SeaBank</span></div>
+              </label>
+            </div>
+            <p class="font-weight-bold mb-2" style="font-size:13px;color:#555">LAINNYA</p>
+            <div class="row mx-0 mb-3">
+              <label class="payment-option col-6 col-md-3 mb-2">
+                <input type="radio" name="payment" value="qris">
+                <div class="payment-box"><div class="payment-logo" style="background:#DC1F26">QRIS</div><span class="payment-name">QRIS All</span></div>
+              </label>
+              <label class="payment-option col-6 col-md-3 mb-2">
+                <input type="radio" name="payment" value="indomaret">
+                <div class="payment-box"><div class="payment-logo" style="background:#ED1C24">Indo</div><span class="payment-name">Indomaret</span></div>
+              </label>
+            </div>
+            <button class="submit-button btn">Beli sekarang</button>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+
+        <!-- Order Modal -->
+        <div class="modal fade" id="orderModal" tabindex="-1" role="dialog">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content" style="border-radius:15px;">
+              <div class="modal-header border-0 pb-0">
+                <h5 class="modal-title font-weight-bold" style="color:#F093B2;">
+                  <i class="fas fa-shopping-bag mr-2"></i>Detail Pesanan
+                </h5>
+                <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+              </div>
+              <div class="modal-body">
+                <div class="bg-light rounded p-3 mb-3">
+                  <table class="table table-borderless table-sm mb-0">
+                    <tr><td class="font-weight-bold" style="width:40%">Game</td><td id="modal-game-name"></td></tr>
+                    <tr><td class="font-weight-bold">Item</td><td id="modal-item-name"></td></tr>
+                    <tr><td class="font-weight-bold">Harga</td><td id="modal-item-price" class="font-weight-bold" style="color:#F093B2"></td></tr>
+                    <tr><td class="font-weight-bold">User ID</td><td id="modal-user-id"></td></tr>
+                    <tr id="modal-zone-row" style="display:none"><td class="font-weight-bold">Zone ID</td><td id="modal-zone-id"></td></tr>
+                    <tr><td class="font-weight-bold">Pembayaran</td><td id="modal-payment" class="font-weight-bold" style="color:#F093B2"></td></tr>
+                  </table>
+                </div>
+                <p class="text-muted mb-0" style="font-size:13px;">
+                  <i class="fas fa-info-circle mr-1"></i>
+                  Lakukan pembayaran sesuai metode yang dipilih, lalu hubungi admin untuk konfirmasi.
+                </p>
+              </div>
+              <div class="modal-footer border-0 pt-0">
+                <button type="button" class="btn btn-outline-secondary btn-sm" data-dismiss="modal">Tutup</button>
+                <a id="modal-wa-btn" href="#" target="_blank" class="btn btn-success btn-sm">
+                  <i class="fab fa-whatsapp mr-1"></i>Konfirmasi ke Admin
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
 
         <!-- Footer -->
@@ -351,24 +446,58 @@
             $(this).addClass("active");
         });
 
-        // Memperoleh nilai dari input dan elemen lainnya
+
         $(".submit-button").on("click", function () {
-            var userID = $("input#user-id").val();
-            var zoneID = $("input#zone-id").val();
-            var itemName = $(".product-item.active").find("h6#item").text().trim();
-            var itemPrice = $(".product-item.active").find("h6#harga").text().trim();
+            if (!$(".product-item.active").length) {
+                alert("Silakan pilih nominal top up terlebih dahulu!");
+                return;
+            }
+            var userID = $("input#user-id").val().trim();
+            if (!userID) {
+                alert("Silakan masukkan User ID terlebih dahulu!");
+                return;
+            }
+            var selectedPayment = $("input[name='payment']:checked");
+            if (!selectedPayment.length) {
+                alert("Silakan pilih metode pembayaran terlebih dahulu!");
+                return;
+            }
+            var zoneID = $("input#zone-id").val().trim();
+            var gameName = $("h1").first().text().trim();
+            var cardBody = $(".product-item.active .card-body");
+            var allH6 = cardBody.find("h6");
+            var itemName = allH6.first().text().trim();
+            var itemPrice = allH6.last().text().trim();
+            var paymentLabel = selectedPayment.closest("label").find(".payment-name").text().trim();
 
-            // Membuat pesan WhatsApp dengan format yang diinginkan
-            var whatsappMessage = "Hallo saya ingin order item berikut \n" +
-                "Nama Game: Diamond Kecil\n" +
-                "Item: " + itemName + "\n" +
-                "Harga: " + itemPrice + "\n" +
-                "User ID: " + userID + "\n" +
-                "Zone ID: " + zoneID;
+            $("#modal-game-name").text(gameName);
+            $("#modal-item-name").text(itemName);
+            $("#modal-item-price").text(itemPrice);
+            $("#modal-user-id").text(userID);
+            if (zoneID) {
+                $("#modal-zone-row").show();
+                $("#modal-zone-id").text(zoneID);
+            } else {
+                $("#modal-zone-row").hide();
+            }
+            $("#modal-payment").text(paymentLabel);
 
-            // Membuka aplikasi WhatsApp dengan pesan yang telah dibuat
-            var whatsappLink = "https://api.whatsapp.com/send?phone=6289530695776&text=" + encodeURIComponent(whatsappMessage);
-            window.open(whatsappLink);
+            var waMsg = "Hallo saya ingin konfirmasi pesanan:
+" +
+                "Game: " + gameName + "
+" +
+                "Item: " + itemName + "
+" +
+                "Harga: " + itemPrice + "
+" +
+                "User ID: " + userID +
+                (zoneID ? "
+Zone ID: " + zoneID : "") +
+                "
+Pembayaran: " + paymentLabel;
+            $("#modal-wa-btn").attr("href", "https://api.whatsapp.com/send?phone=6289530695776&text=" + encodeURIComponent(waMsg));
+
+            $("#orderModal").modal("show");
         });
     </script>
 

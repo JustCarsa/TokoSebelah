@@ -1,0 +1,186 @@
+<!--
+  ================================================================
+  TOKOSEBELAH - Checkout Snippet (Email + Payment Method)
+  ================================================================
+  Cara pakai:
+  Tempel block <div class="container-fluid px-xl-5 mt-3"> ... </div>
+  ini DI ATAS tombol "Beli Sekarang" yang ada di setiap file
+  produk (id/diamond-fast.html, id/free-fire.html, dst).
+
+  Style sudah pakai Bootstrap 4 + warna pink sama seperti site.
+  Tidak perlu library tambahan.
+  ================================================================
+-->
+
+<!-- ===== CHECKOUT SECTION START ===== -->
+<div class="container-fluid px-xl-5 mt-3">
+  <div class="card border-0 shadow-sm" style="border-radius: 10px;">
+    <div class="card-body p-3 p-md-4">
+
+      <!-- Email opsional -->
+      <h5 class="font-weight-bold mb-1" style="color: #F093B2;">
+        <i class="fas fa-envelope mr-2"></i>Email (Opsional)
+      </h5>
+      <p class="text-muted mb-2" style="font-size: 13px;">
+        Masukkan email kamu untuk menerima info atau receipt pembelian.
+      </p>
+      <div class="form-group mb-4">
+        <input
+          type="email"
+          id="customer-email"
+          class="form-control"
+          placeholder="contoh: kamu@email.com"
+          style="border-radius: 8px; border: 1px solid #f5b4ca;"
+        />
+        <small class="form-text text-muted" style="font-size: 12px;">
+          Tidak wajib diisi, transaksi tetap bisa diproses tanpa email.
+        </small>
+      </div>
+
+      <!-- Metode Pembayaran -->
+      <h5 class="font-weight-bold mb-3" style="color: #F093B2;">
+        <i class="fas fa-credit-card mr-2"></i>Pilih Metode Pembayaran
+      </h5>
+
+      <!-- E-Wallet -->
+      <p class="font-weight-bold mb-2" style="font-size: 13px; color: #555;">E-WALLET</p>
+      <div class="row mx-0 mb-3">
+        <label class="payment-option col-6 col-md-3 mb-2">
+          <input type="radio" name="payment" value="dana" />
+          <div class="payment-box">
+            <div class="payment-logo" style="background: #118EEA;">DANA</div>
+            <span class="payment-name">DANA</span>
+          </div>
+        </label>
+        <label class="payment-option col-6 col-md-3 mb-2">
+          <input type="radio" name="payment" value="ovo" />
+          <div class="payment-box">
+            <div class="payment-logo" style="background: #4C2A86;">OVO</div>
+            <span class="payment-name">OVO</span>
+          </div>
+        </label>
+        <label class="payment-option col-6 col-md-3 mb-2">
+          <input type="radio" name="payment" value="gopay" />
+          <div class="payment-box">
+            <div class="payment-logo" style="background: #00AED6;">GoPay</div>
+            <span class="payment-name">GoPay</span>
+          </div>
+        </label>
+        <label class="payment-option col-6 col-md-3 mb-2">
+          <input type="radio" name="payment" value="shopeepay" />
+          <div class="payment-box">
+            <div class="payment-logo" style="background: #EE4D2D;">ShopeePay</div>
+            <span class="payment-name">ShopeePay</span>
+          </div>
+        </label>
+        <label class="payment-option col-6 col-md-3 mb-2">
+          <input type="radio" name="payment" value="linkaja" />
+          <div class="payment-box">
+            <div class="payment-logo" style="background: #ED1C24;">LinkAja</div>
+            <span class="payment-name">LinkAja</span>
+          </div>
+        </label>
+      </div>
+
+      <!-- Bank Transfer -->
+      <p class="font-weight-bold mb-2" style="font-size: 13px; color: #555;">TRANSFER BANK</p>
+      <div class="row mx-0 mb-3">
+        <label class="payment-option col-6 col-md-3 mb-2">
+          <input type="radio" name="payment" value="bca" />
+          <div class="payment-box">
+            <div class="payment-logo" style="background: #0060A8;">BCA</div>
+            <span class="payment-name">Bank BCA</span>
+          </div>
+        </label>
+        <label class="payment-option col-6 col-md-3 mb-2">
+          <input type="radio" name="payment" value="seabank" />
+          <div class="payment-box">
+            <div class="payment-logo" style="background: #FF5C00;">SeaBank</div>
+            <span class="payment-name">SeaBank</span>
+          </div>
+        </label>
+      </div>
+
+      <!-- Lainnya -->
+      <p class="font-weight-bold mb-2" style="font-size: 13px; color: #555;">LAINNYA</p>
+      <div class="row mx-0 mb-2">
+        <label class="payment-option col-6 col-md-3 mb-2">
+          <input type="radio" name="payment" value="qris" />
+          <div class="payment-box">
+            <div class="payment-logo" style="background: #DC1F26;">QRIS</div>
+            <span class="payment-name">QRIS All</span>
+          </div>
+        </label>
+        <label class="payment-option col-6 col-md-3 mb-2">
+          <input type="radio" name="payment" value="indomaret" />
+          <div class="payment-box">
+            <div class="payment-logo" style="background: #ED1C24;">Indo</div>
+            <span class="payment-name">Indomaret</span>
+          </div>
+        </label>
+      </div>
+
+      <!-- Tombol Beli Sekarang -->
+      <button
+        type="button"
+        class="btn btn-block mt-3 py-2 font-weight-bold"
+        id="btn-beli-sekarang"
+        style="background-color: #F093B2; color: #fff; border-radius: 10px; font-size: 16px;"
+        onmouseover="this.style.backgroundColor='#ff8eb2'"
+        onmouseout="this.style.backgroundColor='#F093B2'"
+      >
+        <i class="fas fa-shopping-cart mr-2"></i>BELI SEKARANG
+      </button>
+
+    </div>
+  </div>
+</div>
+
+<!-- CSS untuk payment option (tempel di <head> atau biarkan di sini) -->
+<style>
+  .payment-option {
+    cursor: pointer;
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+  .payment-option input[type="radio"] {
+    display: none;
+  }
+  .payment-box {
+    border: 2px solid #eee;
+    border-radius: 10px;
+    padding: 12px 8px;
+    text-align: center;
+    transition: all 0.2s ease;
+    background: #fff;
+    height: 100%;
+  }
+  .payment-option:hover .payment-box {
+    border-color: #f5b4ca;
+    transform: translateY(-2px);
+  }
+  .payment-option input[type="radio"]:checked + .payment-box {
+    border-color: #F093B2;
+    background-color: #fff5f8;
+    box-shadow: 0 4px 12px rgba(240, 147, 178, 0.25);
+  }
+  .payment-logo {
+    color: #fff;
+    font-weight: 700;
+    font-size: 12px;
+    padding: 8px 6px;
+    border-radius: 6px;
+    margin-bottom: 6px;
+    letter-spacing: 0.3px;
+  }
+  .payment-name {
+    display: block;
+    font-size: 12px;
+    color: #555;
+    font-weight: 500;
+  }
+  #btn-beli-sekarang:hover {
+    box-shadow: 0 6px 14px rgba(240, 147, 178, 0.4);
+  }
+</style>
+<!-- ===== CHECKOUT SECTION END ===== -->
