@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Profil — TOKOSEBELAH</title>
+  <link rel="shortcut icon" href="../assets/icon.jpg" type="image/x-icon" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="../assets/css/user.css" />
+  <script src="../assets/js/auth.js"></script>
+</head>
+<body class="user-page">
+
+  <!-- Top Bar -->
+  <div id="ts-user-bar"></div>
+
+  <!-- Hero -->
+  <div class="user-page-hero">
+    <h2>Profil Saya</h2>
+    <p>Kelola informasi akun kamu</p>
+  </div>
+
+  <div style="padding:0 16px;">
+
+    <!-- Avatar + name card -->
+    <div class="user-card" style="text-align:center;padding-top:10px;">
+      <div class="big-avatar" id="avatar-letter">?</div>
+      <div id="profile-name" style="font-size:18px;font-weight:700;color:#333;margin-bottom:2px;"></div>
+      <div id="profile-email" style="font-size:13px;color:#aaa;margin-bottom:16px;"></div>
+
+      <!-- EXP mini bar -->
+      <div style="background:#f8f0f4;border-radius:10px;padding:12px 16px;margin-bottom:16px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+          <span style="font-size:12px;font-weight:600;color:#F093B2;"><i class="fas fa-star mr-1"></i>EXP</span>
+          <span id="exp-text" style="font-size:12px;color:#aaa;"></span>
+        </div>
+        <div class="exp-bar-wrap">
+          <div class="exp-bar-fill" id="exp-bar" style="width:0%"></div>
+        </div>
+        <div style="text-align:center;margin-top:8px;">
+          <a href="rewards.html" style="font-size:12px;color:#F093B2;font-weight:600;text-decoration:none;">
+            Lihat Reward & Voucher <i class="fas fa-arrow-right ml-1"></i>
+          </a>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:10px;justify-content:center;">
+        <a href="rewards.html" class="user-btn user-btn-outline" style="font-size:13px;padding:8px 16px;">
+          <i class="fas fa-star"></i> Rewards
+        </a>
+        <button class="user-btn user-btn-danger" style="font-size:13px;padding:8px 16px;" onclick="doLogout()">
+          <i class="fas fa-sign-out-alt"></i> Keluar
+        </button>
+      </div>
+    </div>
+
+    <!-- Edit Profile card -->
+    <div class="user-card" style="margin-top:0;">
+      <h5 style="font-weight:700;color:#333;margin:0 0 20px;font-size:16px;">
+        <i class="fas fa-user-edit mr-2" style="color:#F093B2;"></i>Edit Profil
+      </h5>
+
+      <div class="ts-alert ts-alert-error" id="alert-err"></div>
+      <div class="ts-alert ts-alert-success" id="alert-ok"></div>
+
+      <div class="form-group-u">
+        <label class="user-form-label">Nama Lengkap</label>
+        <input type="text" id="p-name" class="user-input" placeholder="Nama lengkap kamu" />
+      </div>
+      <div class="form-group-u">
+        <label class="user-form-label">Email</label>
+        <input type="email" id="p-email" class="user-input" placeholder="email@kamu.com" />
+      </div>
+      <div class="form-group-u">
+        <label class="user-form-label">Nomor Telepon <span style="color:#bbb;font-weight:400;">(Opsional)</span></label>
+        <input type="tel" id="p-phone" class="user-input" placeholder="08xxxxxxxxxx" />
+      </div>
+
+      <hr class="ts-divider" />
+      <h6 style="font-weight:700;color:#333;margin:0 0 14px;font-size:14px;">
+        <i class="fas fa-lock mr-2" style="color:#F093B2;"></i>Ganti Password
+      </h6>
+      <div class="form-group-u">
+        <label class="user-form-label">Password Lama</label>
+        <div style="position:relative;">
+          <input type="password" id="p-old-pass" class="user-input" placeholder="Password saat ini" style="padding-right:42px;" />
+          <button type="button" onclick="togglePw('p-old-pass',this)" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;color:#aaa;cursor:pointer;padding:0;">
+            <i class="fas fa-eye"></i>
+          </button>
+        </div>
+      </div>
+      <div class="form-group-u">
+        <label class="user-form-label">Password Baru <span style="color:#bbb;font-weight:400;">(kosongkan jika tidak ingin ganti)</span></label>
+        <div style="position:relative;">
+          <input type="password" id="p-new-pass" class="user-input" placeholder="Password baru (min. 6 karakter)" style="padding-right:42px;" />
+          <button type="button" onclick="togglePw('p-new-pass',this)" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;color:#aaa;cursor:pointer;padding:0;">
+            <i class="fas fa-eye"></i>
+          </button>
+        </div>
+      </div>
+
+      <button class="user-btn user-btn-primary" style="width:100%;justify-content:center;margin-top:4px;" onclick="saveProfile()">
+        <i class="fas fa-save"></i> Simpan Perubahan
+      </button>
+    </div>
+
+    <p style="text-align:center;font-size:12px;color:#bbb;margin-top:4px;">
+      <a href="../index.html" style="color:#F093B2;">← Kembali ke halaman utama</a>
+    </p>
+  </div>
+
+  <script>
+    var user = Auth.getCurrentUser();
+    if (!user) window.location.href = 'login.html';
+
+    function loadProfile() {
+      user = Auth.getCurrentUser();
+      if (!user) return;
+      document.getElementById('avatar-letter').textContent = user.name.charAt(0).toUpperCase();
+      document.getElementById('profile-name').textContent = user.name;
+      document.getElementById('profile-email').textContent = user.email;
+      document.getElementById('p-name').value = user.name;
+      document.getElementById('p-email').value = user.email;
+      document.getElementById('p-phone').value = user.phone || '';
+
+      var exp = user.exp || 0;
+      var pct = Math.min((exp % 1000) / 10, 100);
+      document.getElementById('exp-bar').style.width = pct + '%';
+      document.getElementById('exp-text').textContent = (exp % 1000) + ' / 1000 EXP';
+    }
+    loadProfile();
+
+    function showError(msg) {
+      var el = document.getElementById('alert-err');
+      el.textContent = msg; el.className = 'ts-alert ts-alert-error show';
+      document.getElementById('alert-ok').className = 'ts-alert ts-alert-success';
+    }
+    function showSuccess(msg) {
+      var el = document.getElementById('alert-ok');
+      el.textContent = msg; el.className = 'ts-alert ts-alert-success show';
+      document.getElementById('alert-err').className = 'ts-alert ts-alert-error';
+    }
+    function togglePw(id, btn) {
+      var inp = document.getElementById(id);
+      var t = inp.type === 'text';
+      inp.type = t ? 'password' : 'text';
+      btn.innerHTML = '<i class="fas fa-eye' + (t ? '' : '-slash') + '"></i>';
+    }
+
+    function saveProfile() {
+      var name  = document.getElementById('p-name').value.trim();
+      var email = document.getElementById('p-email').value.trim();
+      var phone = document.getElementById('p-phone').value.trim();
+      var oldP  = document.getElementById('p-old-pass').value;
+      var newP  = document.getElementById('p-new-pass').value;
+
+      if (!name) { showError('Nama tidak boleh kosong.'); return; }
+      if (!email) { showError('Email tidak boleh kosong.'); return; }
+
+      var updates = { name: name, email: email, phone: phone };
+
+      if (newP || oldP) {
+        if (!oldP) { showError('Masukkan password lama untuk mengganti password.'); return; }
+        if (oldP !== user.password) { showError('Password lama salah.'); return; }
+        if (!newP || newP.length < 6) { showError('Password baru minimal 6 karakter.'); return; }
+        updates.password = newP;
+      }
+
+      var updated = Auth.updateUser(updates);
+      if (updated) {
+        user = updated;
+        showSuccess('Profil berhasil disimpan!');
+        loadProfile();
+        document.getElementById('p-old-pass').value = '';
+        document.getElementById('p-new-pass').value = '';
+      } else {
+        showError('Gagal menyimpan perubahan.');
+      }
+    }
+
+    function doLogout() {
+      if (confirm('Yakin ingin keluar?')) {
+        Auth.logout();
+        window.location.href = 'login.html';
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login — TOKOSEBELAH</title>
+  <link rel="shortcut icon" href="../assets/icon.jpg" type="image/x-icon" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="../assets/css/user.css" />
+  <script src="../assets/js/auth.js"></script>
+</head>
+<body class="user-page" style="display:flex;align-items:center;justify-content:center;padding:20px;">
+
+  <div style="width:100%;max-width:440px;">
+    <!-- Logo -->
+    <div style="text-align:center;margin-bottom:24px;">
+      <a href="../index.html" style="text-decoration:none;">
+        <div style="font-size:22px;font-weight:800;color:#F093B2;">TOKOSEBELAH</div>
+        <div style="font-size:12px;color:#aaa;letter-spacing:1px;">TOP UP GAME MURAH & AMAN</div>
+      </a>
+    </div>
+
+    <div class="user-card" style="margin-top:0;">
+      <!-- Tabs -->
+      <div class="ts-tabs">
+        <div class="ts-tab active" id="tab-login" onclick="switchTab('login')">
+          <i class="fas fa-sign-in-alt mr-1"></i> Login
+        </div>
+        <div class="ts-tab" id="tab-register" onclick="switchTab('register')">
+          <i class="fas fa-user-plus mr-1"></i> Daftar
+        </div>
+      </div>
+
+      <!-- Alert -->
+      <div class="ts-alert ts-alert-error" id="alert-box"></div>
+      <div class="ts-alert ts-alert-success" id="alert-success"></div>
+
+      <!-- LOGIN FORM -->
+      <div id="form-login">
+        <div class="form-group-u">
+          <label class="user-form-label">Email</label>
+          <input type="email" id="l-email" class="user-input" placeholder="email@kamu.com" />
+        </div>
+        <div class="form-group-u">
+          <label class="user-form-label">Password</label>
+          <div style="position:relative;">
+            <input type="password" id="l-pass" class="user-input" placeholder="Password kamu" style="padding-right:42px;" />
+            <button type="button" onclick="togglePw('l-pass',this)" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;color:#aaa;cursor:pointer;padding:0;">
+              <i class="fas fa-eye"></i>
+            </button>
+          </div>
+        </div>
+        <button class="user-btn user-btn-primary" style="width:100%;justify-content:center;margin-top:6px;" onclick="doLogin()">
+          <i class="fas fa-sign-in-alt"></i> Masuk
+        </button>
+        <p style="text-align:center;font-size:13px;color:#aaa;margin-top:14px;">
+          Belum punya akun? <a href="#" onclick="switchTab('register');return false;" style="color:#F093B2;font-weight:600;">Daftar sekarang</a>
+        </p>
+      </div>
+
+      <!-- REGISTER FORM -->
+      <div id="form-register" style="display:none;">
+        <div class="form-group-u">
+          <label class="user-form-label">Nama Lengkap</label>
+          <input type="text" id="r-name" class="user-input" placeholder="Nama kamu" />
+        </div>
+        <div class="form-group-u">
+          <label class="user-form-label">Email</label>
+          <input type="email" id="r-email" class="user-input" placeholder="email@kamu.com" />
+        </div>
+        <div class="form-group-u">
+          <label class="user-form-label">Password</label>
+          <div style="position:relative;">
+            <input type="password" id="r-pass" class="user-input" placeholder="Min. 6 karakter" style="padding-right:42px;" />
+            <button type="button" onclick="togglePw('r-pass',this)" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;color:#aaa;cursor:pointer;padding:0;">
+              <i class="fas fa-eye"></i>
+            </button>
+          </div>
+        </div>
+        <div class="form-group-u">
+          <label class="user-form-label">Nomor Telepon <span style="color:#bbb;font-weight:400;">(Opsional)</span></label>
+          <input type="tel" id="r-phone" class="user-input" placeholder="08xxxxxxxxxx" />
+        </div>
+        <button class="user-btn user-btn-primary" style="width:100%;justify-content:center;margin-top:6px;" onclick="doRegister()">
+          <i class="fas fa-user-plus"></i> Buat Akun
+        </button>
+        <p style="text-align:center;font-size:13px;color:#aaa;margin-top:14px;">
+          Sudah punya akun? <a href="#" onclick="switchTab('login');return false;" style="color:#F093B2;font-weight:600;">Login di sini</a>
+        </p>
+      </div>
+    </div>
+
+    <p style="text-align:center;font-size:12px;color:#bbb;margin-top:16px;">
+      <a href="../index.html" style="color:#F093B2;">← Kembali ke halaman utama</a>
+    </p>
+  </div>
+
+  <script>
+    // Redirect if already logged in
+    (function() {
+      var u = Auth.getCurrentUser();
+      if (u) window.location.href = u.role === 'admin' ? '../admin/admin.html' : 'profile.html';
+    })();
+
+    function switchTab(tab) {
+      document.getElementById('form-login').style.display = tab === 'login' ? 'block' : 'none';
+      document.getElementById('form-register').style.display = tab === 'register' ? 'block' : 'none';
+      document.getElementById('tab-login').className = 'ts-tab' + (tab === 'login' ? ' active' : '');
+      document.getElementById('tab-register').className = 'ts-tab' + (tab === 'register' ? ' active' : '');
+      clearAlerts();
+    }
+
+    function showError(msg) {
+      var el = document.getElementById('alert-box');
+      el.textContent = msg;
+      el.className = 'ts-alert ts-alert-error show';
+      document.getElementById('alert-success').className = 'ts-alert ts-alert-success';
+    }
+    function showSuccess(msg) {
+      var el = document.getElementById('alert-success');
+      el.textContent = msg;
+      el.className = 'ts-alert ts-alert-success show';
+      document.getElementById('alert-box').className = 'ts-alert ts-alert-error';
+    }
+    function clearAlerts() {
+      document.getElementById('alert-box').className = 'ts-alert ts-alert-error';
+      document.getElementById('alert-success').className = 'ts-alert ts-alert-success';
+    }
+
+    function togglePw(id, btn) {
+      var inp = document.getElementById(id);
+      var isText = inp.type === 'text';
+      inp.type = isText ? 'password' : 'text';
+      btn.innerHTML = '<i class="fas fa-eye' + (isText ? '' : '-slash') + '"></i>';
+    }
+
+    function doLogin() {
+      var email = document.getElementById('l-email').value.trim();
+      var pass  = document.getElementById('l-pass').value;
+      if (!email || !pass) { showError('Email dan password wajib diisi.'); return; }
+      var res = Auth.login(email, pass);
+      if (res.ok) {
+        showSuccess('Login berhasil! Mengalihkan...');
+        setTimeout(function() {
+          window.location.href = res.user.role === 'admin' ? '../admin/admin.html' : 'profile.html';
+        }, 800);
+      } else {
+        showError(res.msg);
+      }
+    }
+
+    function doRegister() {
+      var name  = document.getElementById('r-name').value.trim();
+      var email = document.getElementById('r-email').value.trim();
+      var pass  = document.getElementById('r-pass').value;
+      var phone = document.getElementById('r-phone').value.trim();
+      if (!name) { showError('Nama lengkap wajib diisi.'); return; }
+      if (!email) { showError('Email wajib diisi.'); return; }
+      if (!pass || pass.length < 6) { showError('Password minimal 6 karakter.'); return; }
+      var res = Auth.register({ name: name, email: email, password: pass, phone: phone });
+      if (res.ok) {
+        showSuccess('Akun berhasil dibuat! Mengalihkan...');
+        setTimeout(function() {
+          window.location.href = res.user.role === 'admin' ? '../admin/admin.html' : 'profile.html';
+        }, 800);
+      } else {
+        showError(res.msg);
+      }
+    }
+
+    // Enter key support
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') {
+        var loginVisible = document.getElementById('form-login').style.display !== 'none';
+        if (loginVisible) doLogin(); else doRegister();
+      }
+    });
+  </script>
+</body>
+</html>

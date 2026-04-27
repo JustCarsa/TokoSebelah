@@ -22,6 +22,7 @@
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
   <link rel="stylesheet" href="admin.css" />
+  <script src="../assets/js/auth.js"></script>
 </head>
 <body>
 
@@ -44,6 +45,9 @@
       </a>
       <a href="#" class="nav-item" data-page="banners">
         <i class="fas fa-image"></i> <span>Banner & Slider</span>
+      </a>
+      <a href="#" class="nav-item" data-page="members">
+        <i class="fas fa-users"></i> <span>Anggota</span>
       </a>
       <a href="#" class="nav-item" data-page="settings">
         <i class="fas fa-cog"></i> <span>Pengaturan</span>
@@ -635,6 +639,51 @@
         </div>
       </section>
 
+      <!-- ============ MEMBERS ============ -->
+      <section class="page" id="page-members" style="display:none;">
+        <div class="page-header">
+          <div>
+            <h2 class="page-title">Anggota</h2>
+            <p class="page-subtitle">Daftar semua user terdaftar di TOKOSEBELAH.</p>
+          </div>
+          <span id="member-count-badge" class="badge badge-pill" style="background:var(--navy);color:#fff;font-size:13px;padding:8px 16px;"></span>
+        </div>
+
+        <div class="filter-bar">
+          <div class="filter-search">
+            <i class="fas fa-search"></i>
+            <input type="text" id="member-search" placeholder="Cari nama atau email..." oninput="filterMembers()" />
+          </div>
+          <select class="form-control form-control-sm filter-select" id="member-sort" onchange="filterMembers()">
+            <option value="exp-desc">EXP Tertinggi</option>
+            <option value="exp-asc">EXP Terendah</option>
+            <option value="name">Nama A-Z</option>
+            <option value="date-desc">Terbaru</option>
+          </select>
+        </div>
+
+        <div class="panel">
+          <div class="table-responsive">
+            <table class="table table-hover mb-0">
+              <thead>
+                <tr>
+                  <th>Anggota</th>
+                  <th>Email</th>
+                  <th>Telepon</th>
+                  <th>EXP</th>
+                  <th>Level</th>
+                  <th>Voucher</th>
+                  <th>Bergabung</th>
+                </tr>
+              </thead>
+              <tbody id="member-table-body">
+                <tr><td colspan="7" class="text-center text-muted py-4">Memuat data...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
       <!-- ============ SETTINGS ============ -->
       <section class="page" id="page-settings" style="display:none;">
         <div class="page-header">
@@ -679,17 +728,210 @@
           </div>
 
           <hr />
-          <h6 class="mb-3">Metode Pembayaran</h6>
-          <div class="payment-methods">
-            <label class="pm-check"><input type="checkbox" checked /> DANA</label>
-            <label class="pm-check"><input type="checkbox" checked /> OVO</label>
-            <label class="pm-check"><input type="checkbox" checked /> GOPAY</label>
-            <label class="pm-check"><input type="checkbox" checked /> SHOPEEPAY</label>
-            <label class="pm-check"><input type="checkbox" checked /> LINKAJA</label>
-            <label class="pm-check"><input type="checkbox" checked /> BCA</label>
-            <label class="pm-check"><input type="checkbox" checked /> SEABANK</label>
-            <label class="pm-check"><input type="checkbox" checked /> INDOMARET</label>
-            <label class="pm-check"><input type="checkbox" checked /> QRIS</label>
+          <h6 class="mb-1">Metode Pembayaran</h6>
+          <p class="text-muted mb-3" style="font-size:12px">Aktifkan metode dan isi detail pembayaran yang akan ditampilkan ke pelanggan.</p>
+
+          <!-- E-WALLET -->
+          <div class="pm-group-label">E-WALLET</div>
+
+          <div class="pm-card">
+            <div class="pm-card-header">
+              <div class="pm-card-left">
+                <div class="pm-logo" style="background:#118EEA">DANA</div>
+                <span class="pm-card-name">DANA</span>
+              </div>
+              <label class="pm-switch">
+                <input type="checkbox" checked />
+                <span class="pm-slider"></span>
+              </label>
+            </div>
+            <div class="pm-card-body">
+              <div class="form-group mb-0">
+                <label>Nomor Telepon</label>
+                <input type="text" class="form-control" placeholder="08xxxxxxxxxx" value="0895-3069-5776" />
+              </div>
+            </div>
+          </div>
+
+          <div class="pm-card">
+            <div class="pm-card-header">
+              <div class="pm-card-left">
+                <div class="pm-logo" style="background:#4C2A86">OVO</div>
+                <span class="pm-card-name">OVO</span>
+              </div>
+              <label class="pm-switch">
+                <input type="checkbox" checked />
+                <span class="pm-slider"></span>
+              </label>
+            </div>
+            <div class="pm-card-body">
+              <div class="form-group mb-0">
+                <label>Nomor Telepon</label>
+                <input type="text" class="form-control" placeholder="08xxxxxxxxxx" value="0895-3069-5776" />
+              </div>
+            </div>
+          </div>
+
+          <div class="pm-card">
+            <div class="pm-card-header">
+              <div class="pm-card-left">
+                <div class="pm-logo" style="background:#00AED6">GP</div>
+                <span class="pm-card-name">GoPay</span>
+              </div>
+              <label class="pm-switch">
+                <input type="checkbox" checked />
+                <span class="pm-slider"></span>
+              </label>
+            </div>
+            <div class="pm-card-body">
+              <div class="form-group mb-0">
+                <label>Nomor Telepon</label>
+                <input type="text" class="form-control" placeholder="08xxxxxxxxxx" value="0895-3069-5776" />
+              </div>
+            </div>
+          </div>
+
+          <div class="pm-card">
+            <div class="pm-card-header">
+              <div class="pm-card-left">
+                <div class="pm-logo" style="background:#EE4D2D">SP</div>
+                <span class="pm-card-name">ShopeePay</span>
+              </div>
+              <label class="pm-switch">
+                <input type="checkbox" checked />
+                <span class="pm-slider"></span>
+              </label>
+            </div>
+            <div class="pm-card-body">
+              <div class="form-group mb-0">
+                <label>Nomor Telepon</label>
+                <input type="text" class="form-control" placeholder="08xxxxxxxxxx" value="0895-3069-5776" />
+              </div>
+            </div>
+          </div>
+
+          <div class="pm-card">
+            <div class="pm-card-header">
+              <div class="pm-card-left">
+                <div class="pm-logo" style="background:#ED1C24">LA</div>
+                <span class="pm-card-name">LinkAja</span>
+              </div>
+              <label class="pm-switch">
+                <input type="checkbox" checked />
+                <span class="pm-slider"></span>
+              </label>
+            </div>
+            <div class="pm-card-body">
+              <div class="form-group mb-0">
+                <label>Nomor Telepon</label>
+                <input type="text" class="form-control" placeholder="08xxxxxxxxxx" value="0895-3069-5776" />
+              </div>
+            </div>
+          </div>
+
+          <!-- TRANSFER BANK -->
+          <div class="pm-group-label mt-3">TRANSFER BANK</div>
+
+          <div class="pm-card">
+            <div class="pm-card-header">
+              <div class="pm-card-left">
+                <div class="pm-logo" style="background:#0060A8">BCA</div>
+                <span class="pm-card-name">Bank BCA</span>
+              </div>
+              <label class="pm-switch">
+                <input type="checkbox" checked />
+                <span class="pm-slider"></span>
+              </label>
+            </div>
+            <div class="pm-card-body">
+              <div class="form-row">
+                <div class="form-group col-md-6 mb-0">
+                  <label>Nama Rekening</label>
+                  <input type="text" class="form-control" placeholder="Nama pemilik rekening" />
+                </div>
+                <div class="form-group col-md-6 mb-0">
+                  <label>Nomor Rekening</label>
+                  <input type="text" class="form-control" placeholder="1234567890" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="pm-card">
+            <div class="pm-card-header">
+              <div class="pm-card-left">
+                <div class="pm-logo" style="background:#FF5C00">SB</div>
+                <span class="pm-card-name">SeaBank</span>
+              </div>
+              <label class="pm-switch">
+                <input type="checkbox" checked />
+                <span class="pm-slider"></span>
+              </label>
+            </div>
+            <div class="pm-card-body">
+              <div class="form-row">
+                <div class="form-group col-md-6 mb-0">
+                  <label>Nama Rekening</label>
+                  <input type="text" class="form-control" placeholder="Nama pemilik rekening" />
+                </div>
+                <div class="form-group col-md-6 mb-0">
+                  <label>Nomor Rekening</label>
+                  <input type="text" class="form-control" placeholder="1234567890" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- LAINNYA -->
+          <div class="pm-group-label mt-3">LAINNYA</div>
+
+          <div class="pm-card">
+            <div class="pm-card-header">
+              <div class="pm-card-left">
+                <div class="pm-logo" style="background:#DC1F26">QR</div>
+                <span class="pm-card-name">QRIS All Payment</span>
+              </div>
+              <label class="pm-switch">
+                <input type="checkbox" checked />
+                <span class="pm-slider"></span>
+              </label>
+            </div>
+            <div class="pm-card-body">
+              <label>Upload Gambar QR Code</label>
+              <div class="pm-qris-area">
+                <div class="upload-box upload-box-sm" id="qrisUploadBox" onclick="document.getElementById('qrisInput').click()">
+                  <i class="fas fa-qrcode"></i>
+                  <p class="m-0">Klik untuk upload QR Code</p>
+                  <small class="text-muted">PNG, JPG max 2MB</small>
+                </div>
+                <input type="file" id="qrisInput" accept="image/*" style="display:none" onchange="previewQris(this)" />
+                <div class="qris-preview" id="qrisPreview" style="display:none">
+                  <img id="qrisImg" src="" alt="QR Code" />
+                  <button type="button" class="btn btn-sm btn-outline-danger mt-2" onclick="removeQris()">
+                    <i class="fas fa-trash mr-1"></i>Hapus
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="pm-card">
+            <div class="pm-card-header">
+              <div class="pm-card-left">
+                <div class="pm-logo" style="background:#ED1C24">IM</div>
+                <span class="pm-card-name">Indomaret</span>
+              </div>
+              <label class="pm-switch">
+                <input type="checkbox" checked />
+                <span class="pm-slider"></span>
+              </label>
+            </div>
+            <div class="pm-card-body">
+              <div class="form-group mb-0">
+                <label>Kode / ID Pembayaran</label>
+                <input type="text" class="form-control" placeholder="Kode atau ID Indomaret" />
+              </div>
+            </div>
           </div>
 
           <div class="text-right mt-4">
@@ -876,5 +1118,117 @@
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
   <script src="admin.js"></script>
+  <script>
+    function previewQris(input) {
+      if (!input.files || !input.files[0]) return;
+      var reader = new FileReader();
+      reader.onload = function(e) {
+        document.getElementById('qrisImg').src = e.target.result;
+        document.getElementById('qrisUploadBox').style.display = 'none';
+        document.getElementById('qrisPreview').style.display = 'flex';
+      };
+      reader.readAsDataURL(input.files[0]);
+    }
+    function removeQris() {
+      document.getElementById('qrisInput').value = '';
+      document.getElementById('qrisImg').src = '';
+      document.getElementById('qrisPreview').style.display = 'none';
+      document.getElementById('qrisUploadBox').style.display = 'block';
+    }
+  </script>
+  <script>
+    // ── Admin guard ──────────────────────────────────────────────────
+    (function () {
+      var u = Auth.getCurrentUser();
+      if (!u || u.role !== 'admin') {
+        window.location.href = '../id/login.html';
+      }
+    })();
+
+    // ── Logout button ────────────────────────────────────────────────
+    document.querySelector('.logout-btn').addEventListener('click', function (e) {
+      e.preventDefault();
+      if (confirm('Yakin ingin keluar dari panel admin?')) {
+        Auth.logout();
+        window.location.href = '../id/login.html';
+      }
+    });
+
+    // ── Level helper ─────────────────────────────────────────────────
+    function expLevel(exp) {
+      if (exp >= 10000) return { label: 'Diamond', color: '#a78bfa' };
+      if (exp >= 6000)  return { label: 'Platinum', color: '#06b6d4' };
+      if (exp >= 3000)  return { label: 'Gold',    color: '#f59e0b' };
+      if (exp >= 1000)  return { label: 'Silver',  color: '#9ca3af' };
+      return { label: 'Pemula', color: '#F093B2' };
+    }
+    function fmtDate(iso) {
+      if (!iso) return '-';
+      return new Date(iso).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' });
+    }
+
+    // ── Members page ─────────────────────────────────────────────────
+    var _allMembers = [];
+
+    function renderMemberTable(users) {
+      var tbody = document.getElementById('member-table-body');
+      if (!users.length) {
+        tbody.innerHTML = '<tr><td colspan="7" class="text-center text-muted py-4">Tidak ada anggota ditemukan.</td></tr>';
+        return;
+      }
+      tbody.innerHTML = users.map(function (u) {
+        var lv = expLevel(u.exp || 0);
+        var av = (u.name || '?').charAt(0).toUpperCase();
+        var vActive = (u.vouchers || []).filter(function (v) { return !v.used; }).length;
+        var vUsed   = (u.vouchers || []).length - vActive;
+        return '<tr>' +
+          '<td><div class="prod-cell">' +
+            '<div class="prod-thumb" style="background:linear-gradient(135deg,#F093B2,#f5b4ca);color:#fff;font-weight:700;">' + av + '</div>' +
+            '<div><div class="prod-name">' + u.name + '</div>' +
+            '<small class="text-muted">' + (u.role === 'admin' ? '👑 Admin' : 'User') + '</small></div>' +
+          '</div></td>' +
+          '<td style="font-size:13px;">' + u.email + '</td>' +
+          '<td style="font-size:13px;">' + (u.phone || '<span class="text-muted">-</span>') + '</td>' +
+          '<td><strong style="color:var(--navy);">' + (u.exp || 0).toLocaleString() + '</strong></td>' +
+          '<td><span class="badge badge-pill" style="background:' + lv.color + ';color:#fff;font-size:11px;padding:5px 10px;">' + lv.label + '</span></td>' +
+          '<td style="font-size:13px;">' +
+            '<span class="text-success font-weight-bold">' + vActive + ' aktif</span>' +
+            (vUsed > 0 ? ' <span class="text-muted">/ ' + vUsed + ' terpakai</span>' : '') +
+          '</td>' +
+          '<td style="font-size:12px;color:#888;">' + fmtDate(u.createdAt) + '</td>' +
+        '</tr>';
+      }).join('');
+    }
+
+    function filterMembers() {
+      var q    = (document.getElementById('member-search').value || '').toLowerCase();
+      var sort = document.getElementById('member-sort').value;
+      var list = _allMembers.filter(function (u) {
+        return u.role !== 'admin' &&
+          (u.name.toLowerCase().indexOf(q) !== -1 || u.email.toLowerCase().indexOf(q) !== -1);
+      });
+      list.sort(function (a, b) {
+        if (sort === 'exp-desc') return (b.exp || 0) - (a.exp || 0);
+        if (sort === 'exp-asc')  return (a.exp || 0) - (b.exp || 0);
+        if (sort === 'name')     return a.name.localeCompare(b.name);
+        return new Date(b.createdAt) - new Date(a.createdAt);
+      });
+      renderMemberTable(list);
+    }
+
+    function loadMembers() {
+      _allMembers = Auth.getUsers();
+      var userCount = _allMembers.filter(function (u) { return u.role !== 'admin'; }).length;
+      document.getElementById('member-count-badge').textContent = userCount + ' anggota';
+      filterMembers();
+    }
+
+    // Trigger loadMembers when Members nav is clicked
+    document.querySelectorAll('.sidebar-nav .nav-item').forEach(function (item) {
+      item.addEventListener('click', function () {
+        if (this.getAttribute('data-page') === 'members') loadMembers();
+      });
+    });
+  </script>
 </body>
 </html>
