@@ -4,17 +4,17 @@
    ============================================ */
 
 :root {
-  --navy: #000080;
-  --navy-light: #1a1aaa;
-  --navy-bright: #4D4DFF;
-  --navy-soft: #e8e8ff;
-  --navy-pale: #f3f3ff;
+  --navy: #c7587a;
+  --navy-light: #b5496b;
+  --navy-bright: #F6BDD1;
+  --navy-soft: #fdedf3;
+  --navy-pale: #fff8fb;
   --bg: #f5f6fb;
   --sidebar-bg: #ffffff;
   --text: #1f2240;
   --muted: #7a7d99;
   --border: #e6e8f1;
-  --shadow: 0 2px 12px rgba(0, 0, 128, 0.06);
+  --shadow: 0 2px 12px rgba(199, 87, 122, 0.06);
   --sidebar-w: 250px;
 }
 
@@ -90,7 +90,7 @@ a { text-decoration: none; }
 .sidebar-nav .nav-item.active {
   background: var(--navy);
   color: #fff;
-  box-shadow: 0 6px 14px rgba(0, 0, 128, 0.35);
+  box-shadow: 0 6px 14px rgba(199, 87, 122, 0.35);
 }
 
 .sidebar-footer {
@@ -241,7 +241,7 @@ a { text-decoration: none; }
   border: none;
   padding: 9px 18px;
   border-radius: 10px;
-  box-shadow: 0 6px 14px rgba(0, 0, 128, 0.3);
+  box-shadow: 0 6px 14px rgba(199, 87, 122, 0.3);
   transition: all 0.15s ease;
 }
 .btn-primary-pink:hover {
@@ -292,8 +292,8 @@ a { text-decoration: none; }
   font-size: 20px;
   flex-shrink: 0;
 }
-.bg-pink   { background: linear-gradient(135deg, #000080, #4D4DFF); }
-.bg-blue   { background: linear-gradient(135deg, #4D4DFF, #1a1aaa); }
+.bg-pink   { background: linear-gradient(135deg, #c7587a, #F6BDD1); }
+.bg-blue   { background: linear-gradient(135deg, #F6BDD1, #c7587a); }
 .bg-green  { background: linear-gradient(135deg, #34d399, #10b981); }
 .bg-purple { background: linear-gradient(135deg, #a78bfa, #7c3aed); }
 
@@ -561,7 +561,7 @@ a { text-decoration: none; }
 }
 .form-control:focus {
   border-color: var(--navy);
-  box-shadow: 0 0 0 3px rgba(0, 0, 128, 0.12);
+  box-shadow: 0 0 0 3px rgba(199, 87, 122, 0.12);
 }
 .form-group label {
   font-size: 12px;
